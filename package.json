@@ -1,0 +1,17 @@
+{
+  "name": "smart-canteen-preorder-system",
+  "version": "1.0.0",
+  "description": "AI-inspired Smart Canteen Pre-Order System for reducing student waiting time",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^6.17.0",
+    "serverless-http": "^4.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node tests/runTests.js"
+  }
+}

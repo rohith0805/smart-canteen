@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Canteen Pre-Order System</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="login-shell" id="loginView">
+      <section class="login-hero">
+        <div class="login-brand">
+          <p class="brand-kicker">Campus food, but faster</p>
+          <h1>CanteenGo</h1>
+          <p class="brand-copy">
+            A smart pre-ordering app inspired by modern food delivery experiences. Skip the queue, track status live,
+            and pick up right on time.
+          </p>
+          <div class="login-points">
+            <span>Live menu</span>
+            <span>Queue prediction</span>
+            <span>Instant order tracking</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="login-panel">
+        <div class="auth-card">
+          <p class="auth-mini">Welcome back</p>
+          <h2>Login to order</h2>
+          <p class="auth-copy">Use your student details to enter the Smart Canteen app.</p>
+
+          <form id="loginForm" class="auth-form">
+            <label>
+              Full name
+              <input id="loginName" type="text" placeholder="Enter your full name" required />
+            </label>
+
+            <label>
+              College email
+              <input id="loginEmail" type="email" placeholder="name@college.edu" required />
+            </label>
+
+            <label>
+              Student ID
+              <input id="loginStudentId" type="text" placeholder="22CS1234" required />
+            </label>
+
+            <label>
+              Login as
+              <select id="loginRole" required>
+                <option value="student">Student</option>
+                <option value="canteen">Canteen Staff</option>
+              </select>
+            </label>
+
+            <button type="submit" class="primary-button auth-button">Continue</button>
+          </form>
+
+          <div id="loginMessage" class="message-panel hidden"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="app-shell hidden" id="appView">
+      <header class="topbar">
+        <div class="topbar-brand">
+          <span class="logo-pill">C</span>
+          <div>
+            <p class="topbar-mini">Smart Campus Ordering</p>
+            <h1>CanteenGo</h1>
+          </div>
+        </div>
+
+        <div class="topbar-search">
+          <input id="menuSearch" type="search" placeholder="Search dosa, coffee, thali..." />
+        </div>
+
+        <div class="topbar-user">
+          <div class="user-chip">
+            <strong id="userNameLabel">Student</strong>
+            <span id="userEmailLabel">student@college.edu</span>
+          </div>
+          <button id="logoutButton" class="ghost-button">Logout</button>
+        </div>
+      </header>
+
+      <section class="hero-banner">
+        <div class="hero-copy-block">
+          <p class="hero-kicker">Order ahead like a food app</p>
+          <h2>Discover meals, predict your wait, and collect without the rush.</h2>
+          <p>
+            Designed for campus canteens with live queue visibility, faster pickups, and a modern delivery-style order
+            journey.
+          </p>
+          <div class="hero-actions">
+            <button id="jumpToMenuButton" class="primary-button">Browse Menu</button>
+            <button id="refreshDashboard" class="secondary-button">Refresh Live Status</button>
+          </div>
+        </div>
+
+        <div class="hero-summary">
+          <div class="hero-summary-card">
+            <span>Today's promise</span>
+            <strong>Faster campus dining</strong>
+            <p>Pre-order before peak hours and track your order from queue to pickup.</p>
+          </div>
+        </div>
+      </section>
+
+      <main class="app-grid">
+        <section class="panel panel-wide">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Live Snapshot</p>
+              <h2>Campus Order Activity</h2>
+            </div>
+          </div>
+          <div id="stats" class="stats-grid"></div>
+          <div id="recentOrders" class="feed-grid"></div>
+        </section>
+
+        <section class="panel" id="menuSection">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Menu</p>
+              <h2>Recommended For You</h2>
+            </div>
+            <span class="tag">Pre-order enabled</span>
+          </div>
+          <div id="menuGrid" class="restaurant-grid"></div>
+        </section>
+
+        <section class="panel sticky-panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Your Cart</p>
+              <h2>Place Order</h2>
+            </div>
+            <span class="tag">Fast pickup</span>
+          </div>
+
+          <form id="orderForm" class="order-form">
+            <label>
+              Student name
+              <input id="studentName" name="studentName" type="text" placeholder="Enter your name" required />
+            </label>
+
+            <label>
+              Pickup time
+              <input id="pickupTime" name="pickupTime" type="time" required />
+            </label>
+
+            <label>
+              Order time
+              <input id="orderTime" name="orderTime" type="datetime-local" required />
+            </label>
+
+            <div class="selected-items">
+              <div class="cart-heading">
+                <h3>Selected Items</h3>
+                <span id="cartTotalLabel">0 items</span>
+              </div>
+              <div id="selectedItems"></div>
+            </div>
+
+            <div class="actions">
+              <button type="button" id="predictButton" class="secondary-button">Predict Queue</button>
+              <button type="submit" class="primary-button">Place Pre-Order</button>
+            </div>
+          </form>
+
+          <div id="predictionResult" class="message-panel hidden"></div>
+          <div id="orderResult" class="message-panel success hidden"></div>
+        </section>
+
+        <section class="panel student-panel" id="studentOrdersPanel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">My Orders</p>
+              <h2>Your Order Tracking</h2>
+            </div>
+            <span class="tag">Student view</span>
+          </div>
+          <div id="studentOrders" class="tracking-grid"></div>
+        </section>
+
+        <section class="panel canteen-panel" id="canteenOrdersPanel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Canteen Desk</p>
+              <h2>Active Orders</h2>
+            </div>
+            <span class="tag">Canteen only</span>
+          </div>
+          <div id="manageOrders" class="tracking-grid"></div>
+          <div id="manageResult" class="message-panel hidden"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="popupOverlay" class="popup-overlay hidden">
+      <div class="popup-card">
+        <div class="popup-head">
+          <h3 id="popupTitle">Notification</h3>
+          <button id="popupCloseButton" class="ghost-button">Close</button>
+        </div>
+        <p id="popupBody"></p>
+        <div class="popup-actions">
+          <button id="popupOkButton" class="primary-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
