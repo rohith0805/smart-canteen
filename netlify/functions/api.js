@@ -39,7 +39,12 @@ function sendJson(status, payload) {
 function getFunctionSubPath(request) {
   const url = new URL(request.url);
   const marker = "/.netlify/functions/api";
-  const pathname = url.pathname.startsWith(marker) ? url.pathname.slice(marker.length) : url.pathname;
+  let pathname = url.pathname.startsWith(marker) ? url.pathname.slice(marker.length) : url.pathname;
+  if (pathname.startsWith("/api/")) {
+    pathname = pathname.slice(4);
+  } else if (pathname === "/api") {
+    pathname = "/";
+  }
   return pathname || "/";
 }
 
@@ -55,6 +60,10 @@ export default async (request) => {
 
     if (request.method === "GET" && pathname === "/menu") {
       return sendJson(200, { items: await getMenu(db) });
+    }
+
+    if (request.method === "GET" && pathname === "/health") {
+      return sendJson(200, { ok: true, database: "connected" });
     }
 
     if (request.method === "GET" && pathname === "/dashboard") {

@@ -5,9 +5,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "express": "^5.2.1",
-    "mongodb": "^6.17.0",
-    "serverless-http": "^4.0.0"
+    "mongodb": "^6.17.0"
   },
   "scripts": {
     "start": "node server.js",

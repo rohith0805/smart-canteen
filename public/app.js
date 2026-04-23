@@ -35,9 +35,7 @@ const popupTitle = document.querySelector("#popupTitle");
 const popupBody = document.querySelector("#popupBody");
 const popupCloseButton = document.querySelector("#popupCloseButton");
 const popupOkButton = document.querySelector("#popupOkButton");
-const apiBase = window.location.hostname.includes("netlify")
-  ? "/.netlify/functions/api"
-  : "/api";
+const apiBase = "/api";
 let refreshIntervalId;
 let previousOrderSnapshot = new Map();
 const pickupAlertsShown = new Set();

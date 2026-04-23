@@ -59,6 +59,12 @@ This project is now prepared for Netlify using:
    - `MONGODB_DB_NAME`
 5. Deploy the site.
 
+Important:
+
+- Do not use `mongodb://127.0.0.1:27017` on Netlify.
+- Netlify cannot access the MongoDB running on your own computer.
+- Use MongoDB Atlas or another cloud MongoDB URL in `MONGODB_URI`.
+
 After deployment:
 
 - frontend will load from Netlify
